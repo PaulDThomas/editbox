@@ -1,5 +1,7 @@
-import { AibLineType, AsupInternalBlock } from "../../../src/main";
 import { useMemo, useState } from "react";
+import { testEditorProps } from "../../../__dummy__/TestEditor";
+import { EditorProps } from "../../../src/components/aie/editorProps";
+import { AibLineType, AsupInternalBlock } from "../../../src/main";
 
 export const CurrentPage = () => {
   const [left, setLeft] = useState<string>("");
@@ -9,6 +11,8 @@ export const CurrentPage = () => {
       lineType: AibLineType.leftOnly,
       left: left,
       addBelow: false,
+      canEdit: true,
+      canChangeType: true,
       canRemove: false,
       canMove: false,
       center: null,
@@ -31,7 +35,7 @@ export const CurrentPage = () => {
       <h2>Current</h2>
       <AsupInternalBlock
         id="pageby"
-        style={{
+        lineStyle={{
           fontFamily: "Courier New",
           fontSize: "9pt",
           fontWeight: 500,
@@ -40,6 +44,7 @@ export const CurrentPage = () => {
         setLines={(ret) => ret[0].left !== left && setLeft(ret[0].left ?? "")}
         externalSingles={[
           {
+            airid: "one",
             oldText: "=",
             newText: "<=",
           },
@@ -68,6 +73,7 @@ export const CurrentPage = () => {
         }}
         minLines={1}
         maxLines={1}
+        editorProps={testEditorProps as EditorProps<string>}
       />
     </div>
   );

@@ -37,7 +37,7 @@ describe("AsupInternalBlock tests", () => {
           setLines={setLines}
           minLines={minLines}
           maxLines={maxLines}
-          Editor={TestEditor}
+          editorProps={TestEditor}
           replaceTextInT={replaceTextInTestEditor}
           blankT={""}
         />

@@ -37,3 +37,13 @@
   font-style: italic;
   opacity: 1;
 }
+
+.aibLine.one {
+  width: 100%;
+}
+.aibLine.two {
+  width: 50%;
+}
+.aibLine.three {
+  width: 33.3333%;
+}

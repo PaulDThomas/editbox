@@ -70,7 +70,7 @@ export const BlockPage = () => {
           }}
           defaultType={AibLineType.leftOnly}
           externalSingles={externalSingles}
-          Editor={(props) =>
+          editorProps={(props) =>
             EditorV3Wrapper({
               ...props,
               customStyleMap: {

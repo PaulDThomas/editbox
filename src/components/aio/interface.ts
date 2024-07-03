@@ -9,7 +9,7 @@ export interface AioOption {
 }
 
 /** Text replacements, and their replacement matrix */
-export interface AioReplacement<T extends string | object> {
+export interface AioReplacement<T> {
   airid?: string;
   oldText: string;
   newTexts: AioReplacementValues<T>[];
@@ -17,22 +17,22 @@ export interface AioReplacement<T extends string | object> {
   externalName?: string;
 }
 
-export interface AioReplacementValues<T extends string | object> {
+export interface AioReplacementValues<T> {
   airid?: string;
   texts: T[];
   spaceAfter?: boolean;
   subLists?: AioReplacement<T>[];
 }
 
-export interface AioExternalReplacements<T extends string | object> {
+export interface AioExternalReplacements<T> {
   givenName: string;
   newTexts: AioReplacementValues<T>[];
 }
 
-export interface AioExternalSingle<T extends string | object> {
-  airid?: string;
-  oldText?: string;
-  newText?: T;
+export interface AioExternalSingle<T> {
+  airid: string;
+  oldText: string;
+  newText: T;
 }
 
 export enum AioOptionType {

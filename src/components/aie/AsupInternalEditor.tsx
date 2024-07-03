@@ -18,7 +18,7 @@ import { styleMapToDraft } from "./functions/styleMapToDraft";
 import { styleMapToExclude } from "./functions/styleMapToExclude";
 
 /** Interface for the AsupInternalEditor component */
-export interface AsupInternalEditorProps<T extends string | object> {
+export interface AsupInternalEditorProps<T> {
   id: string;
   value?: T;
   setValue?: (ret: T) => void;
@@ -33,7 +33,7 @@ export interface AsupInternalEditorProps<T extends string | object> {
   [key: string]: unknown;
 }
 
-export const AsupInternalEditor = <T extends string | object>({
+export const AsupInternalEditor = <T,>({
   id,
   value,
   setValue,

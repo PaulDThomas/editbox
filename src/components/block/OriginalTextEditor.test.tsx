@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { TestEditor } from "../../../__dummy__/TestEditor";
 import { AieStyleMap } from "../aie";
-import { AibOriginalText } from "./AibOriginalText";
+import { OriginalTextEditor } from "./OriginalTextEditor";
 
 describe("AibOriginalText", () => {
   test("renders the component with provided props", () => {
@@ -13,7 +13,7 @@ describe("AibOriginalText", () => {
     const canEdit = true;
 
     render(
-      <AibOriginalText
+      <OriginalTextEditor
         id={id}
         label={label}
         text={text}

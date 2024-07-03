@@ -1,4 +1,4 @@
-export const splitIntoLines = <T extends string | object>(text: T): T[] => {
+export const splitIntoLines = <T>(text: T): T[] => {
   if (typeof text === "string") {
     return text.split("\n") as T[];
   } else {
@@ -6,7 +6,7 @@ export const splitIntoLines = <T extends string | object>(text: T): T[] => {
   }
 };
 
-export const joinIntoBlock = <T extends string | object>(lines: T[]): T => {
+export const joinIntoBlock = <T>(lines: T[]): T => {
   if (lines.length === 0) return "" as T;
   else if (typeof lines[0] === "string") {
     return lines.join("\n") as T;

@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { AsupInternalEditorProps } from "../src/components/aie/AsupInternalEditor";
+import { EditorProps } from "../src/components/aie/editorProps";
 
-export const TestEditor = <T extends string | object>(props: AsupInternalEditorProps<T>) => {
+export const TestEditor = <T,>(props: AsupInternalEditorProps<T>) => {
   const [text, setText] = useState<string>();
   useEffect(() => {
     if (typeof props.value === "string") setText(props.value);
@@ -24,4 +25,13 @@ export const TestEditor = <T extends string | object>(props: AsupInternalEditorP
 
 export const replaceTextInTestEditor = (text: string, oldPhrase: string, newPhrase: string) => {
   return text.replaceAll(oldPhrase, newPhrase);
+};
+
+export const testEditorProps: EditorProps<string> = {
+  Editor: TestEditor,
+  getTextFromT: (text: string) => [text],
+  replaceTextInT: replaceTextInTestEditor,
+  blankT: "",
+  joinTintoBlock: (lines: string[]) => lines.join("\n"),
+  splitTintoLines: (text: string) => text.split("\n"),
 };
