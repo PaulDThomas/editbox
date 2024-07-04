@@ -1,7 +1,8 @@
 import * as React from "react";
-import { AieStyleMap, AsupInternalEditor } from "../aie";
+import { AsupInternalEditor } from "../aie";
 import { AioLabel } from "./aioLabel";
 import { TableSettingsContext } from "../table/TableSettingsContext";
+import { AieStyleMap } from "../interface";
 
 interface AioCommentProps<T extends string | object> {
   id: string;

@@ -1,8 +1,7 @@
 import { useCallback } from "react";
-import { AsupInternalEditorProps } from "../aie/AsupInternalEditor";
-import { AieStyleMap } from "../aie/functions/aieInterface";
 import { AioExternalReplacements, AioReplacement, AioReplacementValues } from "./interface";
 import { AioReplacementList } from "./aioReplacementList";
+import { AieStyleMap, AsupInternalEditorProps } from "../interface";
 
 interface AioReplacementValuesDisplayProps<T extends string | object> {
   id: string;

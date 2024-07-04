@@ -1,11 +1,10 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { AsupInternalEditorProps } from "../aie/AsupInternalEditor";
-import { AieStyleMap } from "../aie/functions/aieInterface";
 import { fromHtml, newReplacementValues, toHtml } from "../functions";
+import { AieStyleMap, AsupInternalEditorProps } from "../interface";
 import { AioDropSelect } from "./aioDropSelect";
 import { AioIconButton } from "./aioIconButton";
-import { AioExternalReplacements, AioReplacement, AioReplacementValues } from "./interface";
 import { AioReplacementValuesDisplay } from "./aioReplacementValuesDisplay";
+import { AioExternalReplacements, AioReplacement, AioReplacementValues } from "./interface";
 
 interface AioReplacmentDisplayProps<T extends string | object> {
   id: string;

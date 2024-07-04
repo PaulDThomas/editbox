@@ -1,11 +1,10 @@
 import { useCallback, useEffect, useState } from "react";
-import { AieStyleMap } from "../aie";
-import { AsupInternalEditorProps } from "../aie/AsupInternalEditor";
 import { fromHtml, newExternalSingle, toHtml } from "../functions";
 import { AioIconButton } from "./aioIconButton";
 import { AioExternalSingle } from "./interface";
 import { AioLabel } from "./aioLabel";
 import { AioString } from "./aioString";
+import { AieStyleMap, AsupInternalEditorProps } from "../interface";
 
 /**
  * Properties for AioReplacements

@@ -1,6 +1,6 @@
 import { DraftComponent } from "draft-js";
-import { AieStyleMap, AsupInternalEditorProps } from "../aie";
 import { AioExternalReplacements, AioReplacement } from "../aio";
+import { AieStyleMap, AsupInternalEditorProps } from "../interface";
 
 export interface AitCellData<T extends string | object> {
   aitid?: string; // Unique ID

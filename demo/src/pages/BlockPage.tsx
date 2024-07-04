@@ -7,8 +7,8 @@ import {
   AioSingleReplacements,
   AsupInternalBlock,
 } from "../../../src/main";
-import { v3EditorProps } from "../v3editor/v3EditorProps";
 import { EditorV3Wrapper } from "../v3editor/EditorV3Wrapper";
+import { v3EditorProps } from "../v3editor/v3EditorProps";
 
 export const BlockPage = () => {
   const ta = useRef<HTMLTextAreaElement | null>(null);
@@ -81,6 +81,7 @@ export const BlockPage = () => {
             Red: { css: { color: "red" }, aieExclude: ["Green", "Blue"] },
           }}
           defaultType={AibLineType.leftOnly}
+          canChangeType
           externalSingles={externalSingles}
           editorProps={{
             ...v3EditorProps,

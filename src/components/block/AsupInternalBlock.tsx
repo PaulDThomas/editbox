@@ -1,10 +1,8 @@
 import React, { Dispatch, SetStateAction } from "react";
-import { AieStyleMap } from "../aie";
 import { AioExternalSingle } from "../aio";
-import { EditorProps } from "../interface";
-import { AibLineDisplay } from "./AibLineDisplay";
+import { AieStyleMap, EditorProps } from "../interface";
+import { AibBlock } from "./AibBlock";
 import { BlockContextProvider } from "./BlockContentProvider";
-import styles from "./aib.module.css";
 import { AibBlockLine, AibLineType } from "./interface";
 
 interface AsupInternalBlockProps<T> {
@@ -40,7 +38,9 @@ export const AsupInternalBlock = <T,>({
       initialState={{
         id,
         lines,
-        returnData: setLines ?? (() => {}),
+        returnData: (ret) => {
+          setLines && setLines(ret);
+        },
         minLines,
         maxLines,
         externalSingles,
@@ -52,19 +52,7 @@ export const AsupInternalBlock = <T,>({
         disabled,
       }}
     >
-      <div
-        id={id}
-        className={styles.aibBlock}
-      >
-        {lines.map((l: AibBlockLine<unknown>, li: number) => {
-          return (
-            <AibLineDisplay
-              key={`${li}-${l.aifid}`}
-              aifid={l.aifid}
-            />
-          );
-        })}
-      </div>
+      <AibBlock />
     </BlockContextProvider>
   );
 };

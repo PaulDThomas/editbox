@@ -1,9 +1,10 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
+import { AieStyleMap } from "../interface";
 import { AieStyleButtonRow } from "./AieStyleButtonRow";
-import { AieStyleMap, drawInnerHtml, getCaretPosition } from "./functions";
+import "./aiev2.css";
+import { drawInnerHtml, getCaretPosition } from "./functions";
 import { getHTMLfromV2Text } from "./functions/getHTMLfromV2Text";
 import { getV2TextStyle } from "./functions/getV2TextStyle";
-import "./aiev2.css";
 
 interface iEditorV2 {
   id: string;

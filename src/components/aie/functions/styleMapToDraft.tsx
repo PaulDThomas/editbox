@@ -1,5 +1,5 @@
 import { DraftStyleMap } from "draft-js";
-import { AieStyleMap } from "./aieInterface";
+import { AieStyleMap } from "../../interface";
 
 /**
  * Change AieStyle map into Draft-js version

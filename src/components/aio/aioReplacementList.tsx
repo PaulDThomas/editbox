@@ -1,12 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
-import { AsupInternalEditorProps } from "../aie/AsupInternalEditor";
-import { AieStyleMap } from "../aie/functions/aieInterface";
+import { joinIntoBlock, splitIntoLines } from "../aie/functions/splitIntoLines";
 import { newReplacement } from "../functions";
+import { AieStyleMap, AsupInternalEditorProps } from "../interface";
 import { AioIconButton } from "./aioIconButton";
-import { AioExternalReplacements, AioReplacement } from "./interface";
 import { AioLabel } from "./aioLabel";
 import { AioReplacementDisplay } from "./aioReplacementDisplay";
-import { joinIntoBlock, splitIntoLines } from "../aie/functions/splitIntoLines";
+import { AioExternalReplacements, AioReplacement } from "./interface";
 
 /**
  * Properties for AioReplacements

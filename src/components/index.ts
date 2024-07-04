@@ -1,5 +1,5 @@
 import { AibBlockLine, AibLineType, AsupInternalBlock } from "./block";
-import { AieStyleMap, AsupInternalEditor } from "./aie";
+import { AsupInternalEditor } from "./aie";
 import {
   AioDropSelect,
   AioExpander,
@@ -23,7 +23,7 @@ import {
   newRowGroup,
   toHtml,
 } from "./functions";
-import { AsupInternalEditorProps, EditorProps } from "./interface";
+import { AieStyleMap, AsupInternalEditorProps, EditorProps } from "./interface";
 
 export {
   AibLineType,

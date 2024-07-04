@@ -17,10 +17,10 @@ export const AibOptionsWindow = ({
   showWindow,
 }: AibOptionsWindowProps): JSX.Element => {
   const { state, dispatch } = useBlockContext();
-  const ix = state.lines.findIndex((l) => l.aifid === aifid);
-  const thisLine = ix !== -1 ? state.lines[ix] : undefined;
+  const ix = state?.lines.findIndex((l) => l.aifid === aifid) ?? -1;
+  const thisLine = ix !== -1 ? state?.lines[ix] : undefined;
 
-  return !thisLine ? (
+  return !state || !thisLine ? (
     <></>
   ) : (
     <ContextWindow

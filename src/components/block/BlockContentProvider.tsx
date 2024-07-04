@@ -1,14 +1,9 @@
-import { createContext, Dispatch, ReactNode, useContext, useReducer } from "react";
-import { blockReducer, IBlockAction, IBlockState } from "./blockReducer";
+import { createContext, Dispatch, ReactNode, useContext, useEffect, useReducer } from "react";
+import { blockReducer, IBlockAction, IBlockState, SET_STATE } from "./blockReducer";
 
 interface BlockContextProps<T> {
   state: IBlockState<T>;
   dispatch: Dispatch<IBlockAction<T>>;
-}
-
-interface BlockContextProviderProps<T> {
-  initialState: IBlockState<T>;
-  children: ReactNode;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -18,15 +13,24 @@ export const BlockContextProvider = <T,>(props: BlockContextProviderProps<T>): J
   const { initialState, children } = props;
   const [state, dispatch] = useReducer(blockReducer<T>, initialState);
 
+  // Check for initial state update
+  useEffect(() => {
+    dispatch({ type: SET_STATE, state: props.initialState });
+  }, [props.initialState]);
+
   return <BlockContext.Provider value={{ state, dispatch }}>{children}</BlockContext.Provider>;
 };
 BlockContextProvider.displayName = "BlockContextProvider";
 
+interface BlockContextProviderProps<T> {
+  initialState: IBlockState<T>;
+  children: ReactNode;
+}
+
 // Custom hook to use the context
 export function useBlockContext<T>() {
   const context = useContext(BlockContext as React.Context<BlockContextProps<T> | null>);
-  if (!context) {
-    throw new Error("useBlockContext must be used within a BlockContextProvider");
-  }
-  return { state: context.state, dispatch: context.dispatch };
+  return !context
+    ? { state: null, dispatch: null }
+    : { state: context.state, dispatch: context.dispatch };
 }

@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { ContextWindow } from "@asup/context-menu";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { AieStyleMap, AsupInternalEditor, AsupInternalEditorProps, getRawTextParts } from "../aie";
+import { AsupInternalEditor, getRawTextParts } from "../aie";
 import { newReplacedText } from "../aie/functions/newReplacedText";
 import { joinIntoBlock, splitIntoLines } from "../aie/functions/splitIntoLines";
 import {
@@ -23,6 +23,7 @@ import {
 } from "../functions";
 import { newHeaderCell } from "../functions/newCell";
 import { unProcessRowGroup } from "../functions/unProcessRowGroup";
+import { AieStyleMap, AsupInternalEditorProps } from "../interface";
 import { AitBorderRow } from "./AitBorderRow";
 import { AitHeader } from "./AitHeader";
 import { AitRowGroup } from "./AitRowGroup";

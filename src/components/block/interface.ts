@@ -11,7 +11,7 @@ export interface AibBlockLine<T> {
   canChangeType: boolean; // Can update the type of line
 }
 
-export const enum AibLineType {
+export enum AibLineType {
   leftOnly = "Left only",
   centerOnly = "Center only",
   leftAndRight = "Left and Right",

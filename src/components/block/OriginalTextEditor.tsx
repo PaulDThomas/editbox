@@ -8,14 +8,16 @@ interface OriginalTextEditorProps {
 
 export const OriginalTextEditor = ({ aifid, position }: OriginalTextEditorProps): JSX.Element => {
   const { state, dispatch } = useBlockContext();
-  const ix = state.lines.findIndex((l) => l.aifid === aifid);
-  const thisCell = ix !== -1 ? state.lines[ix][position] : undefined;
-  const Editor = state.editorProps.Editor;
+  const ix = state?.lines.findIndex((l) => l.aifid === aifid) ?? -1;
+  const thisCell = ix !== -1 ? state?.lines[ix][position] : undefined;
+  const Editor = state?.editorProps.Editor;
 
-  const id = `${state.id}-${ix}-${position}-original-text`;
+  const id = `${state?.id}-${ix}-${position}-original-text`;
   const label = position.slice(0, 1).toUpperCase() + position.slice(1) + " text";
 
-  return (
+  return !state || !Editor ? (
+    <></>
+  ) : (
     <div className="aiw-body-row">
       <label
         className={"aio-label"}
@@ -23,7 +25,10 @@ export const OriginalTextEditor = ({ aifid, position }: OriginalTextEditorProps)
       >
         {label}
       </label>
-      <div className={"aio-input-holder"}>
+      <div
+        className={"aio-input-holder"}
+        style={{ border: "1px black solid", borderRadius: "4px", padding: "2px" }}
+      >
         <Editor
           id={id}
           value={thisCell ?? state.editorProps.blankT}
@@ -36,9 +41,6 @@ export const OriginalTextEditor = ({ aifid, position }: OriginalTextEditorProps)
               cellContent: ret,
             })
           }
-          style={{
-            border: "1px dashed grey",
-          }}
           showStyleButtons={true}
           styleMap={state.styleMap}
         />
