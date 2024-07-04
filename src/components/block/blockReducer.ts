@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
-import { aieV2EditorProps, EditorProps } from "../aie/editorProps";
-import { AieStyleMap } from "../aie/functions/aieInterface";
+import { aieV2EditorProps } from "../aie/aiev2EditorProps";
 import { AioExternalSingle } from "../aio/interface";
+import { AieStyleMap, EditorProps } from "../interface";
 import { AibBlockLine, AibLineType } from "./interface";
 import { newBlockLine } from "./newBlockLine";
 

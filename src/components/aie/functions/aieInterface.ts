@@ -1,5 +1,3 @@
-import { EditorV3Style } from "@asup/editor-v3";
-
 // Interfaces
 export interface iColourStyles {
   [styleName: string]: React.CSSProperties;
@@ -17,9 +15,6 @@ export interface iColouredLine {
   styleBlocks?: iStyleBlock[];
 }
 
-export interface AieStyleMap {
-  [styleName: string]: { css: React.CSSProperties | EditorV3Style; aieExclude: string[] };
-}
 export interface AieStyleExcludeMap {
   [styleName: string]: string[];
 }

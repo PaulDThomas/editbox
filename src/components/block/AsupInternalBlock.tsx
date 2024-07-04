@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction } from "react";
 import { AieStyleMap } from "../aie";
-import { EditorProps } from "../aie/editorProps";
 import { AioExternalSingle } from "../aio";
+import { EditorProps } from "../interface";
 import { AibLineDisplay } from "./AibLineDisplay";
 import { BlockContextProvider } from "./BlockContentProvider";
 import styles from "./aib.module.css";
@@ -21,7 +21,7 @@ interface AsupInternalBlockProps<T> {
   lineStyle?: React.CSSProperties;
   editorProps: EditorProps<T>;
 }
-export const AsupInternalBlock = ({
+export const AsupInternalBlock = <T,>({
   id,
   lines,
   setLines,
@@ -34,12 +34,13 @@ export const AsupInternalBlock = ({
   canChangeType = false,
   lineStyle,
   editorProps,
-}: AsupInternalBlockProps<unknown>): JSX.Element => {
+}: AsupInternalBlockProps<T>): JSX.Element => {
   return (
-    <BlockContextProvider
+    <BlockContextProvider<T>
       initialState={{
         id,
         lines,
+        returnData: setLines ?? (() => {}),
         minLines,
         maxLines,
         externalSingles,
@@ -49,7 +50,6 @@ export const AsupInternalBlock = ({
         canChangeType,
         editorProps,
         disabled,
-        returnData: setLines ?? (() => {}),
       }}
     >
       <div

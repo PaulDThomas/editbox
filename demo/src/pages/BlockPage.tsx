@@ -1,6 +1,5 @@
 import { IEditorV3 } from "@asup/editor-v3";
 import { useRef, useState } from "react";
-import { replaceTextInEditorV3 } from "../v3editor/replaceTextInEditorV3";
 import {
   AibBlockLine,
   AibLineType,
@@ -8,8 +7,8 @@ import {
   AioSingleReplacements,
   AsupInternalBlock,
 } from "../../../src/main";
+import { v3EditorProps } from "../v3editor/v3EditorProps";
 import { EditorV3Wrapper } from "../v3editor/EditorV3Wrapper";
-import { stringToV3 } from "../v3editor";
 
 export const BlockPage = () => {
   const ta = useRef<HTMLTextAreaElement | null>(null);
@@ -20,12 +19,19 @@ export const BlockPage = () => {
 
   const [lines2, setLines2] = useState<AibBlockLine<IEditorV3>[]>([
     {
+      aifid: "line-1",
       lineType: AibLineType.leftOnly,
       left: { lines: [{ textBlocks: [{ text: "1st line", style: "Blue" }] }] },
+      center: null,
+      right: null,
       canEdit: true,
+      canMove: true,
+      canRemove: true,
       canChangeType: true,
+      addBelow: true,
     },
     {
+      aifid: "line-2",
       lineType: AibLineType.leftOnly,
       left: {
         lines: [
@@ -38,7 +44,13 @@ export const BlockPage = () => {
           },
         ],
       },
+      center: null,
+      right: null,
       canEdit: true,
+      canMove: true,
+      canRemove: true,
+      canChangeType: true,
+      addBelow: true,
     },
   ]);
 
@@ -56,13 +68,13 @@ export const BlockPage = () => {
         }}
       >
         <h5 style={{ width: "5rem" }}>Editor v3</h5>
-        <AsupInternalBlock
+        <AsupInternalBlock<IEditorV3>
           id="test-block-v3"
           lines={lines2}
           setLines={setLines2}
           minLines={1}
           maxLines={10}
-          style={{ fontFamily: "Courier New", fontWeight: 800 }}
+          lineStyle={{ fontFamily: "Courier New", fontWeight: 800 }}
           styleMap={{
             Green: { css: { color: "green" }, aieExclude: ["Blue", "Red"] },
             Blue: { css: { color: "blue" }, aieExclude: ["Green", "Red"] },
@@ -70,18 +82,19 @@ export const BlockPage = () => {
           }}
           defaultType={AibLineType.leftOnly}
           externalSingles={externalSingles}
-          editorProps={(props) =>
-            EditorV3Wrapper({
-              ...props,
-              customStyleMap: {
-                Green: { backgroundColor: "green", isLocked: true },
-                Blue: { color: "blue" },
-                Red: { color: "red", isLocked: true },
-              },
-            })
-          }
-          blankT={stringToV3("")}
-          replaceTextInT={replaceTextInEditorV3}
+          editorProps={{
+            ...v3EditorProps,
+            Editor: (props) => (
+              <EditorV3Wrapper
+                {...props}
+                customStyleMap={{
+                  Green: { backgroundColor: "green", isLocked: true },
+                  Blue: { color: "blue" },
+                  Red: { color: "red", isLocked: true },
+                }}
+              />
+            ),
+          }}
         />
       </div>
 

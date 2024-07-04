@@ -7,31 +7,16 @@ import {
   Modifier,
 } from "draft-js";
 import "draft-js/dist/Draft.css";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { AsupInternalEditorProps } from "../interface";
 import "./aie.css";
 import { AieStyleButtonRow } from "./AieStyleButtonRow";
 import { EditorV2 } from "./EditorV2";
-import { AieStyleExcludeMap, AieStyleMap } from "./functions/aieInterface";
+import { AieStyleExcludeMap } from "./functions/aieInterface";
 import { loadFromHTML } from "./functions/loadFromHTML";
 import { saveToHTML } from "./functions/saveToHTML";
 import { styleMapToDraft } from "./functions/styleMapToDraft";
 import { styleMapToExclude } from "./functions/styleMapToExclude";
-
-/** Interface for the AsupInternalEditor component */
-export interface AsupInternalEditorProps<T> {
-  id: string;
-  value?: T;
-  setValue?: (ret: T) => void;
-  style?: React.CSSProperties;
-  styleMap?: AieStyleMap;
-  textAlignment?: Draft.DraftComponent.Base.DraftTextAlignment | "decimal" | "default";
-  decimalAlignPercent?: number;
-  showStyleButtons?: boolean;
-  editable?: boolean;
-  className?: string;
-  resize?: boolean;
-  [key: string]: unknown;
-}
 
 export const AsupInternalEditor = <T,>({
   id,

@@ -1,5 +1,5 @@
-import { AibBlockLine, AibLineType, AsupInternalBlock, updateLineDisplayVersion } from "./block";
-import { AieStyleMap, AsupInternalEditor, AsupInternalEditorProps } from "./aie";
+import { AibBlockLine, AibLineType, AsupInternalBlock } from "./block";
+import { AieStyleMap, AsupInternalEditor } from "./aie";
 import {
   AioDropSelect,
   AioExpander,
@@ -23,6 +23,7 @@ import {
   newRowGroup,
   toHtml,
 } from "./functions";
+import { AsupInternalEditorProps, EditorProps } from "./interface";
 
 export {
   AibLineType,
@@ -42,7 +43,6 @@ export {
   newReplacementValues,
   newRowGroup,
   toHtml,
-  updateLineDisplayVersion,
 };
 export type {
   AieStyleMap,
@@ -57,4 +57,5 @@ export type {
   AitRowGroupData,
   AitTableData,
   AsupInternalEditorProps,
+  EditorProps,
 };

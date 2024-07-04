@@ -11,13 +11,12 @@ interface BlockContextProviderProps<T> {
   children: ReactNode;
 }
 
-const BlockContext = createContext<BlockContextProps<unknown> | null>(null);
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const BlockContext = createContext<BlockContextProps<any> | null>(null);
 
-export const BlockContextProvider = ({
-  initialState,
-  children,
-}: BlockContextProviderProps<unknown>): JSX.Element => {
-  const [state, dispatch] = useReducer(blockReducer, initialState);
+export const BlockContextProvider = <T,>(props: BlockContextProviderProps<T>): JSX.Element => {
+  const { initialState, children } = props;
+  const [state, dispatch] = useReducer(blockReducer<T>, initialState);
 
   return <BlockContext.Provider value={{ state, dispatch }}>{children}</BlockContext.Provider>;
 };

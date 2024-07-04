@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { AsupInternalEditorProps } from "../src/components/aie/AsupInternalEditor";
-import { EditorProps } from "../src/components/aie/editorProps";
+import { AsupInternalEditorProps, EditorProps } from "../src/main";
 
 export const TestEditor = <T,>(props: AsupInternalEditorProps<T>) => {
   const [text, setText] = useState<string>();
