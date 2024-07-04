@@ -87,6 +87,7 @@ export const BlockPage = () => {
             Editor: (props) => (
               <EditorV3Wrapper
                 {...props}
+                noBorder
                 customStyleMap={{
                   Green: { backgroundColor: "green", isLocked: true },
                   Blue: { color: "blue" },

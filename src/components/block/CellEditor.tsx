@@ -39,9 +39,6 @@ export const CellEditor = <T,>({ aifid, position }: CellEditorProps): JSX.Elemen
           cellContent: ret,
         })
       }
-      style={{
-        border: "1px dashed grey",
-      }}
       showStyleButtons={true}
       styleMap={state.styleMap}
     />

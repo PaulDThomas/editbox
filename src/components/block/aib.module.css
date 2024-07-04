@@ -30,20 +30,36 @@
   opacity: 1;
 }
 
-.aibLine.aibReadOnly .aibLineItem,
-.aibLineItem.aibReadOnly {
+.aibLine {
+  width: 100%;
+}
+
+.aibReadOnly {
   background-color: #d3d3d329;
   color: #0d0d0dc7;
   font-style: italic;
   opacity: 1;
 }
 
-.aibLine.one {
+.aibLineItem {
+  border-top: 1px dashed grey;
+  border-left: 1px dashed grey;
+}
+
+.aibLine:last-child .aibLineItem {
+  border-bottom: 1px dashed grey;
+}
+
+.aibLineItem:last-child {
+  border-right: 1px dashed grey;
+}
+
+.aibLineItem.one {
   width: 100%;
 }
-.aibLine.two {
+.aibLineItem.two {
   width: 50%;
 }
-.aibLine.three {
+.aibLineItem.three {
   width: 33.3333%;
 }
