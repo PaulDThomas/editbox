@@ -1,5 +1,5 @@
+import { ContextMenuHandler } from "@asup/context-menu";
 import { useState } from "react";
-import { AioIconButton } from "../aio";
 import { AddLineButton } from "./AddLineButton";
 import styles from "./aib.module.css";
 import { AibOptionsWindow } from "./AibOptionsWindow";
@@ -19,7 +19,7 @@ export const AibLineDisplay = <T extends string | object>({
   const ix = state?.lines.findIndex((l) => l.aifid === aifid) ?? -1;
   const thisLine = ix !== -1 ? state?.lines[ix] : undefined;
   const [showOptions, setShowOptions] = useState<boolean>(false);
-  const disabled = state?.disabled || !state?.returnData;
+  const disabled = state?.disabled || !state?.returnData || !thisLine?.canEdit;
   const displayType = thisLine?.lineType ?? state?.defaultType ?? AibLineType.leftOnly;
 
   const divClassName = [
@@ -39,56 +39,55 @@ export const AibLineDisplay = <T extends string | object>({
       id={`${state.id}-${ix}`}
       className={[styles.aibLine, disabled ? styles.aibReadOnly : ""].join(" ")}
     >
+      <div className={styles.aibLineButtons} />
       <AibOptionsWindow
         aifid={aifid}
         showWindow={showOptions}
         onClose={() => setShowOptions(false)}
       />
-
-      <div className={styles.aibLineButtons} />
-
-      <div
-        className={styles.aibLineItemHolder}
-        style={{ ...state.lineStyle }}
+      <ContextMenuHandler
+        style={{ width: "Calc(100% - 2px)", height: "Calc(100% - 2px)" }}
+        menuItems={[{ label: "Show line options", action: () => setShowOptions(true) }]}
       >
-        {[AibLineType.leftOnly, AibLineType.leftAndRight, AibLineType.leftCenterAndRight].includes(
-          displayType,
-        ) && (
-          <div className={divClassName}>
-            <CellEditor
-              aifid={aifid}
-              position="left"
-            />
-          </div>
-        )}
-        {[AibLineType.centerOnly, AibLineType.leftCenterAndRight].includes(displayType) && (
-          <div
-            className={divClassName}
-            style={{ flexGrow: 1 }}
-          >
-            <CellEditor
-              aifid={aifid}
-              position="center"
-            />
-          </div>
-        )}
-        {[AibLineType.leftAndRight, AibLineType.leftCenterAndRight].includes(displayType) && (
-          <div className={divClassName}>
-            <CellEditor
-              aifid={aifid}
-              position="right"
-            />
-          </div>
-        )}
-      </div>
+        <div
+          className={styles.aibLineItemHolder}
+          style={{ ...state.lineStyle }}
+        >
+          {[
+            AibLineType.leftOnly,
+            AibLineType.leftAndRight,
+            AibLineType.leftCenterAndRight,
+          ].includes(displayType) && (
+            <div className={divClassName}>
+              <CellEditor
+                aifid={aifid}
+                position="left"
+              />
+            </div>
+          )}
+          {[AibLineType.centerOnly, AibLineType.leftCenterAndRight].includes(displayType) && (
+            <div
+              className={divClassName}
+              style={{ flexGrow: 1 }}
+            >
+              <CellEditor
+                aifid={aifid}
+                position="center"
+              />
+            </div>
+          )}
+          {[AibLineType.leftAndRight, AibLineType.leftCenterAndRight].includes(displayType) && (
+            <div className={divClassName}>
+              <CellEditor
+                aifid={aifid}
+                position="right"
+              />
+            </div>
+          )}
+        </div>
+      </ContextMenuHandler>
 
       <div className={styles.aibLineButtons}>
-        <AioIconButton
-          id={`${state.id}-${ix}-show-options`}
-          onClick={() => setShowOptions(!showOptions)}
-          iconName={"aio-button-row-options"}
-          tipText="Options"
-        />
         {!disabled && (
           <>
             <AddLineButton aifid={aifid} />

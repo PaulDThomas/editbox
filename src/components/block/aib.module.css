@@ -34,7 +34,7 @@
   width: 100%;
 }
 
-.aibReadOnly {
+.aibReadOnly .aibLineItemHolder {
   background-color: #d3d3d329;
   color: #0d0d0dc7;
   font-style: italic;

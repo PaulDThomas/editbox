@@ -1,4 +1,4 @@
-import { cloneDeep, isEqual } from "lodash";
+import { cloneDeep } from "lodash";
 import { useMemo } from "react";
 import { useBlockContext } from "./BlockContentProvider";
 import { UPDATE_CELL } from "./blockReducer";
@@ -29,10 +29,8 @@ export const CellEditor = <T,>({ aifid, position }: CellEditorProps): JSX.Elemen
   ) : (
     <Editor
       id={`${state.id}-${ix}-${position}-text`}
-      value={thisCell ?? state.editorProps.blankT}
-      editable={
-        !state.disabled && state.returnData !== undefined && isEqual(thisCell, displayValue)
-      }
+      value={displayValue ?? state.editorProps.blankT}
+      editable={!state.disabled && state.returnData !== undefined}
       setValue={(ret) =>
         dispatch({
           type: UPDATE_CELL,

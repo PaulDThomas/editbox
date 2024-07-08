@@ -33,6 +33,8 @@ export const OriginalTextEditor = ({ aifid, position }: OriginalTextEditorProps)
           id={id}
           value={thisCell ?? state.editorProps.blankT}
           editable={!state.disabled && state.returnData !== undefined}
+          allowWindowView={false}
+          allowMarkdown={false}
           setValue={(ret) =>
             dispatch({
               type: UPDATE_CELL,

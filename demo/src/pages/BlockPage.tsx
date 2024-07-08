@@ -12,9 +12,6 @@ import { v3EditorProps } from "../v3editor/v3EditorProps";
 
 export const BlockPage = () => {
   const ta = useRef<HTMLTextAreaElement | null>(null);
-  // const [lines, setLines] = useState<AibBlockLine<string>[]>([
-  //   { lineType: AibLineType.leftAndRight, left: "One line", canEdit: true },
-  // ]);
   const [externalSingles, setExternalSingles] = useState<AioExternalSingle<IEditorV3>[]>([]);
 
   const [lines2, setLines2] = useState<AibBlockLine<IEditorV3>[]>([
@@ -54,6 +51,18 @@ export const BlockPage = () => {
     },
   ]);
 
+  const hideContentProps = (key: string, value: unknown) => {
+    if (
+      key === "contentProps" ||
+      key.startsWith("can") ||
+      key === "aifid" ||
+      key.startsWith("add")
+    ) {
+      return undefined;
+    }
+    return value;
+  };
+
   return (
     <>
       <div
@@ -76,9 +85,9 @@ export const BlockPage = () => {
           maxLines={10}
           lineStyle={{ fontFamily: "Courier New", fontWeight: 800 }}
           styleMap={{
-            Green: { css: { color: "green" }, aieExclude: ["Blue", "Red"] },
-            Blue: { css: { color: "blue" }, aieExclude: ["Green", "Red"] },
-            Red: { css: { color: "red" }, aieExclude: ["Green", "Blue"] },
+            Green: { css: { color: "green", isLocked: true } },
+            Blue: { css: { color: "blue" } },
+            Red: { css: { color: "red", isLocked: true } },
           }}
           defaultType={AibLineType.leftOnly}
           canChangeType
@@ -89,104 +98,11 @@ export const BlockPage = () => {
               <EditorV3Wrapper
                 {...props}
                 noBorder
-                customStyleMap={{
-                  Green: { backgroundColor: "green", isLocked: true },
-                  Blue: { color: "blue" },
-                  Red: { color: "red", isLocked: true },
-                }}
               />
             ),
           }}
         />
       </div>
-
-      {/* <div
-        style={{
-          width: "calc(vw - 4rem - 2px)",
-          display: "flex",
-          justifyContent: "center",
-          padding: "1rem",
-          backgroundColor: "white",
-          border: "1px solid black",
-          margin: "1rem",
-        }}
-      >
-        <h5 style={{ width: "5rem" }}>Titles</h5>
-        <AsupInternalBlock
-          id="test-block"
-          lines={lines}
-          setLines={setLines}
-          minLines={3}
-          maxLines={10}
-          externalSingles={externalSingles}
-          style={{ fontFamily: "Courier New", fontWeight: 800 }}
-          styleMap={{
-            Green: { css: { color: "green" }, aieExclude: ["Blue", "Red"] },
-            Blue: { css: { color: "blue" }, aieExclude: ["Green", "Red"] },
-            Red: { css: { color: "red" }, aieExclude: ["Green", "Blue"] },
-          }}
-          defaultType={AibLineType.centerOnly}
-        />
-      </div> */}
-
-      {/* <div
-        style={{
-          width: "calc(vw - 4rem - 2px)",
-          display: "flex",
-          justifyContent: "center",
-          padding: "1rem",
-          backgroundColor: "white",
-          border: "1px solid black",
-          margin: "1rem",
-        }}
-      >
-        <h5 style={{ width: "5rem" }}>Footnotes</h5>
-        <AsupInternalBlock
-          id="test-block"
-          lines={lines}
-          setLines={setLines}
-          minLines={3}
-          maxLines={10}
-          externalSingles={externalSingles}
-          style={{ fontFamily: "Courier New", fontWeight: 800 }}
-          styleMap={{
-            Green: { css: { color: "green" }, aieExclude: ["Blue", "Red"] },
-            Blue: { css: { color: "blue" }, aieExclude: ["Green", "Red"] },
-            Red: { css: { color: "red" }, aieExclude: ["Green", "Blue"] },
-          }}
-          defaultType={AibLineType.leftOnly}
-        />
-      </div> */}
-
-      {/* <div
-        style={{
-          width: "calc(vw - 4rem - 2px)",
-          display: "flex",
-          justifyContent: "center",
-          padding: "1rem",
-          backgroundColor: "white",
-          border: "1px solid black",
-          margin: "1rem",
-        }}
-      >
-        <h5 style={{ width: "5rem" }}>Freeform</h5>
-        <AsupInternalBlock
-          id="test-block"
-          lines={lines}
-          setLines={setLines}
-          minLines={3}
-          maxLines={10}
-          externalSingles={externalSingles}
-          style={{ fontFamily: "Courier New", fontWeight: 800 }}
-          styleMap={{
-            Green: { css: { color: "green" }, aieExclude: ["Blue", "Red"] },
-            Blue: { css: { color: "blue" }, aieExclude: ["Green", "Red"] },
-            Red: { css: { color: "red" }, aieExclude: ["Green", "Blue"] },
-          }}
-          defaultType={AibLineType.leftOnly}
-          canChangeType={true}
-        />
-      </div> */}
 
       <div style={{ margin: "1rem" }}>
         <AioSingleReplacements
@@ -213,8 +129,6 @@ export const BlockPage = () => {
               }
               const j = JSON.parse(ta.current.value ?? "[]");
               setLines2(j);
-              // const convert = j.map((l) => convertBlockLine(l));
-              // setLines2(convert);
             } catch (e) {
               console.warn("JSON parse failed");
               console.dir(e);
@@ -238,6 +152,7 @@ export const BlockPage = () => {
             style={{ width: "100%", height: "220px" }}
             rows={6}
           />
+          <div>{JSON.stringify(lines2, hideContentProps, 2)}</div>
         </pre>
       </div>
     </>

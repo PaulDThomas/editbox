@@ -1,5 +1,5 @@
 import { cloneDeep } from "lodash";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch } from "react";
 import { aieV2EditorProps } from "../aie/aiev2EditorProps";
 import { AioExternalSingle } from "../aio/interface";
 import { AieStyleMap, EditorProps } from "../interface";
@@ -17,7 +17,7 @@ export interface IBlockState<T> {
   canChangeType: boolean;
   editorProps: EditorProps<T>;
   disabled: boolean;
-  returnData?: Dispatch<SetStateAction<AibBlockLine<T>[]>>;
+  returnData?: Dispatch<AibBlockLine<T>[]>;
 }
 
 export const defaultBlockState: IBlockState<string> = {
@@ -114,6 +114,5 @@ export const blockReducer = <T>(state: IBlockState<T>, action: IBlockAction<T>):
     console.warn(errCheck);
     return state;
   }
-  state.returnData && state.returnData(newState.lines);
   return newState;
 };

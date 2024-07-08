@@ -47,18 +47,24 @@ export const AibOptionsWindow = ({
           }
         />
       </div>
-      <OriginalTextEditor
-        aifid={aifid}
-        position="left"
-      />
-      <OriginalTextEditor
-        aifid={aifid}
-        position="center"
-      />
-      <OriginalTextEditor
-        aifid={aifid}
-        position="right"
-      />
+      {thisLine.lineType.toString().includes("Left") && (
+        <OriginalTextEditor
+          aifid={aifid}
+          position="left"
+        />
+      )}
+      {thisLine.lineType.toString().includes("Center") && (
+        <OriginalTextEditor
+          aifid={aifid}
+          position="center"
+        />
+      )}{" "}
+      {thisLine.lineType.toString().includes("Right") && (
+        <OriginalTextEditor
+          aifid={aifid}
+          position="right"
+        />
+      )}
     </ContextWindow>
   );
 };

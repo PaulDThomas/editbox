@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from "react";
+import React, { Dispatch } from "react";
 import { AioExternalSingle } from "../aio";
 import { AieStyleMap, EditorProps } from "../interface";
 import { AibBlock } from "./AibBlock";
@@ -8,7 +8,7 @@ import { AibBlockLine, AibLineType } from "./interface";
 interface AsupInternalBlockProps<T> {
   id: string;
   lines: AibBlockLine<T>[];
-  setLines?: Dispatch<SetStateAction<AibBlockLine<T>[]>>;
+  setLines?: Dispatch<AibBlockLine<T>[]>;
   disabled?: boolean;
   minLines?: number;
   maxLines?: number;

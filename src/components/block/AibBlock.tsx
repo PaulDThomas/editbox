@@ -20,3 +20,5 @@ export const AibBlock = (): JSX.Element => {
     </div>
   );
 };
+
+AibBlock.DisplayName = "AibBlock";
