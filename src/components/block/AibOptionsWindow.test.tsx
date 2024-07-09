@@ -1,79 +1,140 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { act } from "react";
-import { TestEditor } from "../../../__dummy__/TestEditor";
 import { AibOptionsWindow } from "./AibOptionsWindow";
-import { AibLineType } from "./interface";
+import * as bcp from "./BlockContentProvider";
+import { defaultBlockState, IBlockState } from "./blockReducer";
+import { AibBlockLine, AibLineType } from "./interface";
+import { testEditorProps } from "../../../__dummy__/TestEditor";
+import { act } from "react";
 
 describe("AibOptionsWindow tests", () => {
   const user = userEvent.setup();
 
-  test("Basic render and update", async () => {
-    const id = "line-id";
-    const onClose = jest.fn();
-    const displayType = AibLineType.centerOnly;
-    const left = "Left";
-    const center = "Center";
-    const right = "Right";
-    const canChangeType = true;
-    const returnData = jest.fn();
-    const canEdit = true;
+  test("no render when no state", async () => {
+    const aifid = "line-id";
+    jest.spyOn(bcp, "useBlockContext").mockReturnValue({ state: null, dispatch: null });
 
     render(
       <AibOptionsWindow
-        id={id}
+        aifid={aifid}
+        onClose={jest.fn()}
+        showWindow={true}
+      />,
+    );
+    expect(screen.queryByLabelText(/Line type/)).not.toBeInTheDocument();
+  });
+
+  test("Readonly render", async () => {
+    const aifid = "line-id";
+    const mockReturn = jest.fn();
+    const onClose = jest.fn();
+    const mockLine: AibBlockLine<string> = {
+      aifid,
+      left: null,
+      center: "center",
+      right: null,
+      lineType: AibLineType.centerOnly,
+      canEdit: false,
+      canRemove: false,
+      canMove: true,
+      addBelow: false,
+      canChangeType: false,
+    };
+    const state: IBlockState<string> = {
+      ...defaultBlockState,
+      lines: [mockLine],
+      disabled: true,
+      returnData: mockReturn,
+      editorProps: testEditorProps,
+    };
+    const dispatch = jest.fn();
+    jest
+      .spyOn(bcp, "useBlockContext")
+      .mockReturnValue({ state: state as IBlockState<unknown>, dispatch });
+
+    render(
+      <AibOptionsWindow
+        aifid={aifid}
         onClose={onClose}
-        displayType={displayType}
-        left={left}
-        center={center}
-        right={right}
-        returnData={returnData}
-        canChangeType={canChangeType}
-        canEdit={canEdit}
-        Editor={TestEditor}
+        showWindow={true}
+      />,
+    );
+
+    const displayLabel = screen.queryByText(/Line type/) as HTMLSpanElement;
+    expect(displayLabel).toBeInTheDocument();
+    const displaySelect = screen.queryByText(/Center only/) as HTMLSpanElement;
+    expect(displaySelect).toBeInTheDocument();
+    const leftInput = screen.queryByLabelText(/Left/) as HTMLInputElement;
+    expect(leftInput).not.toBeInTheDocument();
+    const centerInput = screen.queryByLabelText(/Center/) as HTMLInputElement;
+    expect(centerInput).toBeInTheDocument();
+    expect(centerInput).toHaveValue("center");
+    expect(centerInput).toBeDisabled();
+    const rightInput = screen.queryByLabelText(/Right/) as HTMLInputElement;
+    expect(rightInput).not.toBeInTheDocument();
+
+    expect(dispatch).not.toHaveBeenCalled();
+    expect(mockReturn).not.toHaveBeenCalled();
+  });
+
+  test("Basic render and update", async () => {
+    const aifid = "line-id";
+    const mockReturn = jest.fn();
+    const onClose = jest.fn();
+    const mockLine: AibBlockLine<string> = {
+      aifid,
+      left: "left",
+      center: null,
+      right: "right",
+      lineType: AibLineType.leftAndRight,
+      canEdit: true,
+      canRemove: true,
+      canMove: true,
+      addBelow: false,
+      canChangeType: true,
+    };
+    const state: IBlockState<string> = {
+      ...defaultBlockState,
+      lines: [mockLine],
+      disabled: false,
+      returnData: mockReturn,
+      editorProps: testEditorProps,
+    };
+    const dispatch = jest.fn();
+    jest
+      .spyOn(bcp, "useBlockContext")
+      .mockReturnValue({ state: state as IBlockState<unknown>, dispatch });
+
+    render(
+      <AibOptionsWindow
+        aifid={aifid}
+        onClose={onClose}
+        showWindow={true}
       />,
     );
 
     const displaySelect = screen.queryByLabelText(/Line type/) as HTMLSelectElement;
     expect(displaySelect).toBeInTheDocument();
-    const leftInput = screen.queryByDisplayValue(left) as HTMLInputElement;
+    expect(displaySelect).toHaveValue("Left and Right");
+    const leftInput = screen.queryByLabelText(/Left/) as HTMLInputElement;
     expect(leftInput).toBeInTheDocument();
-    const centerInput = screen.queryByDisplayValue(center) as HTMLInputElement;
-    expect(centerInput).toBeInTheDocument();
-    const rightInput = screen.queryByDisplayValue(right) as HTMLInputElement;
+    expect(leftInput).toHaveValue("left");
+    const centerInput = screen.queryByLabelText(/Center/) as HTMLInputElement;
+    expect(centerInput).not.toBeInTheDocument();
+    const rightInput = screen.queryByLabelText(/Right/) as HTMLInputElement;
     expect(rightInput).toBeInTheDocument();
+    expect(rightInput).toHaveValue("right");
 
-    expect(returnData).not.toHaveBeenCalled();
+    expect(dispatch).not.toHaveBeenCalled();
+    expect(mockReturn).not.toHaveBeenCalled();
 
     await act(async () => {
-      await user.selectOptions(displaySelect, "Left only");
+      await user.selectOptions(displaySelect, "Center only");
     });
-    expect(returnData).toHaveBeenLastCalledWith({
-      displayType: AibLineType.leftOnly,
-    });
-    await act(async () => {
-      await user.clear(leftInput);
-      await user.type(leftInput, "Left Updated");
-      fireEvent.blur(leftInput);
-    });
-    expect(returnData).toHaveBeenLastCalledWith({
-      left: "Left Updated",
-    });
-    await act(async () => {
-      await user.clear(centerInput);
-      await user.type(centerInput, "Center Updated");
-      fireEvent.blur(centerInput);
-    });
-    expect(returnData).toHaveBeenLastCalledWith({
-      center: "Center Updated",
-    });
-    await act(async () => {
-      await user.clear(rightInput);
-      await user.type(rightInput, "Right Updated");
-      fireEvent.blur(rightInput);
-    });
-    expect(returnData).toHaveBeenLastCalledWith({
-      right: "Right Updated",
+    expect(dispatch).toHaveBeenLastCalledWith({
+      type: "UPDATE_LINE",
+      aifid,
+      line: { ...mockLine, lineType: AibLineType.centerOnly },
     });
   });
 });

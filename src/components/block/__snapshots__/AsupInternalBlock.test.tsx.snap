@@ -1,0 +1,153 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AsupInternalBlock tests Basic render 1`] = `
+<div
+  data-testid="container"
+>
+  <div
+    class="aibBlock"
+    id="line-id"
+  >
+    <div
+      class="aibLine"
+      id="line-id-0"
+    >
+      <div
+        class="aibLineButtons"
+      />
+      <div
+        class="aiw-ContextWindow-module-RIIF9a-contextWindowAnchor"
+      />
+      <div
+        class="aiw-ContextMenu-module-WinFxq-contextMenuHandler "
+      >
+        <div
+          class="aibLineItemHolder"
+        >
+          <div
+            class="aibLineItem  two"
+          >
+            <input
+              class="aio-input"
+              id="line-id-0-left-text"
+              value="First line"
+            />
+          </div>
+          <div
+            class="aibLineItem  two"
+          >
+            <input
+              class="aio-input"
+              id="line-id-0-right-text"
+              value="Right text"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        class="aibLineButtons"
+      >
+        <div
+          class="aio-button-holder"
+          id="line-id-0-add-line-holder"
+        >
+          <div
+            class="aio-tip"
+            style="display: flex; align-content: flex-center;"
+          >
+            <div
+              aria-label="Add line"
+              class="aiox-button aiox-plus"
+              id="line-id-0-add-line"
+              title="Add line"
+            />
+          </div>
+        </div>
+        <div
+          class="aio-button-holder"
+          id="line-id-0-remove-line-holder"
+          style="color: red;"
+        >
+          <div
+            class="aio-tip"
+            style="display: flex; align-content: flex-center;"
+          >
+            <div
+              aria-label="Remove line"
+              class="aiox-button aiox-minus"
+              id="line-id-0-remove-line"
+              title="Remove line"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="aibLine"
+      id="line-id-1"
+    >
+      <div
+        class="aibLineButtons"
+      />
+      <div
+        class="aiw-ContextWindow-module-RIIF9a-contextWindowAnchor"
+      />
+      <div
+        class="aiw-ContextMenu-module-WinFxq-contextMenuHandler "
+      >
+        <div
+          class="aibLineItemHolder"
+        >
+          <div
+            class="aibLineItem  one"
+            style="flex-grow: 1;"
+          >
+            <input
+              class="aio-input"
+              id="line-id-1-center-text"
+              value="Second line"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        class="aibLineButtons"
+      >
+        <div
+          class="aio-button-holder"
+          id="line-id-1-add-line-holder"
+        >
+          <div
+            class="aio-tip"
+            style="display: flex; align-content: flex-center;"
+          >
+            <div
+              aria-label="Add line"
+              class="aiox-button aiox-plus"
+              id="line-id-1-add-line"
+              title="Add line"
+            />
+          </div>
+        </div>
+        <div
+          class="aio-button-holder"
+          id="line-id-1-remove-line-holder"
+          style="color: red;"
+        >
+          <div
+            class="aio-tip"
+            style="display: flex; align-content: flex-center;"
+          >
+            <div
+              aria-label="Remove line"
+              class="aiox-button aiox-minus"
+              id="line-id-1-remove-line"
+              title="Remove line"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

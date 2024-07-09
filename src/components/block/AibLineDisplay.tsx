@@ -37,7 +37,7 @@ export const AibLineDisplay = <T extends string | object>({
   ) : (
     <div
       id={`${state.id}-${ix}`}
-      className={[styles.aibLine, disabled ? styles.aibReadOnly : ""].join(" ")}
+      className={[styles.aibLine].join(" ")}
     >
       <div className={styles.aibLineButtons} />
       <AibOptionsWindow

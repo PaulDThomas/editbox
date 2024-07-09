@@ -9,7 +9,8 @@ interface OriginalTextEditorProps {
 export const OriginalTextEditor = ({ aifid, position }: OriginalTextEditorProps): JSX.Element => {
   const { state, dispatch } = useBlockContext();
   const ix = state?.lines.findIndex((l) => l.aifid === aifid) ?? -1;
-  const thisCell = ix !== -1 ? state?.lines[ix][position] : undefined;
+  const thisLine = ix !== -1 ? state?.lines[ix] : undefined;
+  const thisCell = thisLine?.[position];
   const Editor = state?.editorProps.Editor;
 
   const id = `${state?.id}-${ix}-${position}-original-text`;
@@ -32,7 +33,7 @@ export const OriginalTextEditor = ({ aifid, position }: OriginalTextEditorProps)
         <Editor
           id={id}
           value={thisCell ?? state.editorProps.blankT}
-          editable={!state.disabled && state.returnData !== undefined}
+          editable={!state.disabled && state.returnData !== undefined && thisLine?.canEdit}
           allowWindowView={false}
           allowMarkdown={false}
           setValue={(ret) =>

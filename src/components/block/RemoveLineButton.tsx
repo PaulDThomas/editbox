@@ -16,6 +16,7 @@ export const RemoveLineButton = ({ aifid }: RemoveLineButtonProps): JSX.Element 
     <AioIconButton
       id={`${state.id}-${ix}-add-line`}
       iconName={"aiox-circle-red"}
+      tipText="Remove line"
       style={{ color: "red" }}
     />
   ) : (
@@ -24,6 +25,7 @@ export const RemoveLineButton = ({ aifid }: RemoveLineButtonProps): JSX.Element 
       onClick={() => !state.disabled && state.returnData && dispatch({ type: REMOVE_LINE, aifid })}
       iconName={"aiox-minus"}
       tipText="Remove line"
+      style={{ color: "red" }}
     />
   );
 };

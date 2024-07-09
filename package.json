@@ -33,8 +33,9 @@
   "scripts": {
     "prepare": "husky",
     "start": "rmdir /q/s .\\.parcel-cache && parcel demo/index.html",
-    "test:watch": "jest --watch",
-    "test": "jest",
+    "test-watch": "jest --watch --collectCoverage=true --maxWorkers=4",
+    "test-coverage": "jest --collectCoverage=true --maxWorkers=4",
+    "test": "jest --max-old-space-size=32000 --maxWorkers=1",
     "build": "rmdir /q/s .\\.parcel-cache && parcel build src/main.ts"
   },
   "dependencies": {

@@ -41,8 +41,8 @@ const config: Config = {
   testRegex: "(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$",
 
   // Code coverage
-  collectCoverage: true,
-  coverageProvider: "v8",
+  collectCoverage: false,
+  coverageProvider: "babel",
   collectCoverageFrom: [
     "src/**/*.{js,jsx}",
     "src/**/*.{ts,tsx}",

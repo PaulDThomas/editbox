@@ -1,9 +1,9 @@
 import { fireEvent, render, screen } from "@testing-library/react";
+import { testEditorProps } from "../../../__dummy__/TestEditor";
 import * as bcp from "./BlockContentProvider";
 import { defaultBlockState, IBlockState } from "./blockReducer";
+import { CellEditor } from "./CellEditor";
 import { AibLineType } from "./interface";
-import { OriginalTextEditor } from "./OriginalTextEditor";
-import { testEditorProps } from "../../../__dummy__/TestEditor";
 
 describe("AibOriginalText", () => {
   test("no render when no state", async () => {
@@ -11,12 +11,11 @@ describe("AibOriginalText", () => {
     jest.spyOn(bcp, "useBlockContext").mockReturnValue({ state: null, dispatch: null });
 
     render(
-      <OriginalTextEditor
+      <CellEditor
         aifid={aifid}
         position={"left"}
       />,
     );
-    expect(screen.queryByText("Left text")).not.toBeInTheDocument();
     expect(screen.queryByDisplayValue("left")).not.toBeInTheDocument();
   });
 
@@ -28,7 +27,7 @@ describe("AibOriginalText", () => {
       lines: [
         {
           aifid,
-          left: "left",
+          left: "old left",
           center: null,
           right: "right",
           lineType: AibLineType.leftAndRight,
@@ -40,6 +39,7 @@ describe("AibOriginalText", () => {
         },
       ],
       disabled: false,
+      externalSingles: [{ airid: "repl", oldText: "old", newText: "replaced" }],
       returnData: mockReturn,
       editorProps: testEditorProps,
     };
@@ -49,14 +49,13 @@ describe("AibOriginalText", () => {
       .mockReturnValue({ state: state as IBlockState<unknown>, dispatch });
 
     render(
-      <OriginalTextEditor
+      <CellEditor
         aifid={aifid}
         position={"left"}
       />,
     );
 
-    expect(screen.queryByText("Left text")).toBeInTheDocument();
-    const input = screen.queryByDisplayValue("left") as HTMLInputElement;
+    const input = screen.queryByDisplayValue("replaced left") as HTMLInputElement;
     expect(input).toBeInTheDocument();
     fireEvent.change(input, { target: { value: "new left" } });
     fireEvent.blur(input);

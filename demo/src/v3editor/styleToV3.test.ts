@@ -1,8 +1,8 @@
-import { AieStyleMap } from "../../../src/components/aie/functions/aieInterface";
+import { AieStyleMap } from "../../../src/components/interface";
 import { styleToV3 } from "./styleToV3";
 
 describe("styleToV3", () => {
-  test("Should convert AieStyleMap to EditorV3Styles", () => {
+  test("Should convert AieStyleMap to EditorV3Styles", async () => {
     const style: AieStyleMap = {
       bold: {
         css: {
@@ -39,7 +39,7 @@ describe("styleToV3", () => {
     });
   });
 
-  test("Should handle empty AieStyleMap", () => {
+  test("Should handle empty AieStyleMap", async () => {
     const style: AieStyleMap = {};
 
     const result = styleToV3(style);

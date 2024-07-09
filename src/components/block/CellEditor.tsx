@@ -11,7 +11,8 @@ interface CellEditorProps {
 export const CellEditor = <T,>({ aifid, position }: CellEditorProps): JSX.Element => {
   const { state, dispatch } = useBlockContext<T>();
   const ix = state?.lines.findIndex((l) => l.aifid === aifid) ?? -1;
-  const thisCell = ix !== -1 ? state?.lines[ix][position] : undefined;
+  const thisLine = ix !== -1 ? state?.lines[ix] : undefined;
+  const thisCell = thisLine?.[position];
   const Editor = state?.editorProps.Editor;
 
   // Update for replacements
@@ -30,7 +31,7 @@ export const CellEditor = <T,>({ aifid, position }: CellEditorProps): JSX.Elemen
     <Editor
       id={`${state.id}-${ix}-${position}-text`}
       value={displayValue ?? state.editorProps.blankT}
-      editable={!state.disabled && state.returnData !== undefined}
+      editable={!state.disabled && state.returnData !== undefined && thisLine?.canEdit}
       setValue={(ret) =>
         dispatch({
           type: UPDATE_CELL,

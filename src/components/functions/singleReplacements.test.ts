@@ -7,6 +7,7 @@ jest.mock("./newRow");
 
 describe("Check single replacements", () => {
   const srep: AioExternalSingle<string> = {
+    airid: "repl",
     oldText: "Old",
     newText: "New",
   };

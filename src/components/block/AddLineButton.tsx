@@ -17,12 +17,14 @@ export const AddLineButton = ({ aifid }: AddLineButtonProps): JSX.Element => {
     <AioIconButton
       id={`${state.id}-${ix}-add-line`}
       iconName={"aiox-circle"}
+      tipText="Add line"
     />
   ) : (
     <AioIconButton
       id={`${state.id}-${ix}-add-line`}
       onClick={() => {
         const line = newBlockLine(state.defaultType, state.editorProps.blankT);
+        line.canChangeType = state.canChangeType;
         dispatch({ type: ADD_LINE, aifid, line });
       }}
       iconName={"aiox-plus"}

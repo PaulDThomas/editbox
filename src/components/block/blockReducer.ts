@@ -31,6 +31,7 @@ export const defaultBlockState: IBlockState<string> = {
   canChangeType: false,
   editorProps: aieV2EditorProps,
   disabled: true,
+  /* istanbul ignore next */
   returnData: () => {},
 };
 
@@ -108,7 +109,6 @@ export const blockReducer = <T>(state: IBlockState<T>, action: IBlockAction<T>):
       newState.lines[ix] = action.line;
       break;
     }
-    default:
   }
   if (errCheck.length > 0) {
     console.warn(errCheck);

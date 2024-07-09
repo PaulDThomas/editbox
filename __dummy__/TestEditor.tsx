@@ -14,7 +14,7 @@ export const TestEditor = <T,>(props: AsupInternalEditorProps<T>) => {
     <input
       id={props.id}
       className={"aio-input"}
-      disabled={!props.setValue}
+      disabled={!props.setValue || !props.editable}
       value={text ?? ""}
       onChange={(e) => setText(e.currentTarget.value)}
       onBlur={() => props.setValue && props.setValue(text as T)}

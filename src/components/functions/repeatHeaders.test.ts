@@ -97,6 +97,7 @@ describe("Check repeatHeaders", () => {
   ];
 
   const singleReplacements: AioExternalSingle<string> = {
+    airid: "repl",
     oldText: "r2c9",
     newText: "r2c9-single",
   };

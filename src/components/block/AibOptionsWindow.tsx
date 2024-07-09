@@ -34,9 +34,9 @@ export const AibOptionsWindow = ({
           id={`${state.id}-${ix}-linetype`}
           label="Line type"
           availableValues={["Left only", "Center only", "Left, Center and Right", "Left and Right"]}
-          value={thisLine?.lineType ?? state.defaultType}
+          value={thisLine.lineType}
           setValue={
-            !state.disabled && state.returnData && state.canChangeType
+            !state.disabled && state.returnData && thisLine.canChangeType
               ? (ret) =>
                   dispatch({
                     type: UPDATE_LINE,

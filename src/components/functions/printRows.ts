@@ -1,11 +1,11 @@
-import { AitRowData } from "../ait/aitInterface";
+import { AitRowData } from "../table/interface";
 
 /**
  * Print row data as a character print with new lines, tabs
  * @param rs
  * @returns Table string
  */
-export const printRows = (rs: AitRowData[]): string => {
+export const printRows = (rs: AitRowData<string>[]): string => {
   return (
     "\t" +
     rs

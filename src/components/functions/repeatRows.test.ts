@@ -147,7 +147,7 @@ describe("Check repeat rows", () => {
       true,
       false,
       undefined,
-      [{ oldText: "p1", newText: "p1!" }],
+      [{ airid: "repl", oldText: "p1", newText: "p1!" }],
     );
     const repeatedTexts = repeated.map((r) =>
       r.cells.map((c) => c.replacedText ?? c.text).join(","),
